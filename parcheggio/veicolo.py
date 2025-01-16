@@ -1,4 +1,4 @@
-listamarche = ["Ferrari","Lamborghini","Bugatti","McLaren","Rolls Royce","Bentley","Koenigsegg","Maybach"]
+listamarche = ["Ferrari","Lamborghini","Bugatti","McLaren","Rolls Royce","Bentley","Koenigsegg","Maybach","Ducati","Yamaha","KTM","Honda"]
 listacolore = ["nero","rosso","giallo","verde","carbonio"]
 listaalimentazione = ["benzina","diesel","elettrico","ibrido"]
 alfabeto = "QWERTYUIOPASDFGHJKLZXCVBNM"
@@ -27,7 +27,7 @@ class Veicolo:
         if alimentazione not in listaalimentazione:
             raise ValueError ("Alimentazione non accettata")
             
-            self.__alimentazione = alimentazione
+        self.__alimentazione = alimentazione
         
         if len(targa) != 7 or targa[0] not in alfabeto or targa[1] not in alfabeto or targa[2] not in numeri or targa[3] not in numeri or targa[4] not in numeri or targa[5] not in alfabeto or targa[6] not in alfabeto:
             

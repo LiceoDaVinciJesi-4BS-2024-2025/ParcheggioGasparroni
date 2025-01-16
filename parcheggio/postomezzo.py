@@ -2,7 +2,7 @@ mezziaccettati = ["moto","auto"]
 
 class PostoMezzo:
     def __init__(self):
-        self.__parcheggiauto = 700
+        self.__parcheggiauto = 1000
         
         self.__parcheggimoto = 200
         
@@ -42,10 +42,10 @@ class PostoMezzo:
             
             raise ValueError("Accettiamo solo moto e auto")
         
-        if tipologiamezzo.lower() == "moto" and self.__parcheggimoto >= 1:
+        if tipologiamezzo.lower() == "moto" and self.__parcheggimoto >= 1 and self.__parcheggimoto < 200:
             self.__parcheggimoto += 1
             
-        elif tipologiamezzo.lower() == "auto" and self.__parcheggiauto >= 1:
+        elif tipologiamezzo.lower() == "auto" and self.__parcheggiauto >= 1 and self.__parcheggiauto < 1000:
             self.__parcheggiauto += 1
             
 

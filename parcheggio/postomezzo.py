@@ -76,11 +76,11 @@ class PostoMezzo:
             raise ValueError("Targa non presente nel parcheggio")
 
         tipologiamezzo = self.__postioccupati.pop(targa)[0]
-        
+
         if tipologiamezzo == "moto":
             
             self.__parcheggimoto += 1
-            
+           
         elif tipologiamezzo == "auto":
             
             self.__parcheggiauto += 1

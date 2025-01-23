@@ -1,59 +1,94 @@
-mezziaccettati = ["moto","auto"]
+from datetime import datetime
+
+from datetime import timedelta
+
+alfabeto = "QWERTYUIOPASDFGHJKLZXCVBNM"
+numeri = "1234567890"
+mezziaccettati = ["moto", "auto"]
 
 class PostoMezzo:
     def __init__(self):
-        self.__parcheggiauto = 1000
         
         self.__parcheggimoto = 200
         
+        self.__parcheggiauto = 1000
+        
+        self.__postioccupati = {}
+
     def __str__(self):
-        
-        posti = "Posti" + str(self.__dict__)
-        
-        return posti
-    
-    @property
-    
-    def parcheggiauto(self):
-        
-        return self.__parcheggiauto
+        return "PostoMezzo:" + str(self.__dict__)
     
     @property
     
     def parcheggimoto(self):
-        
         return self.__parcheggimoto
+
+    @property
     
-    def occupaPosto(self,tipologiamezzo):
+    def parcheggiauto(self):
+        return self.__parcheggiauto
+
+    def occupaPosto(self, tipologiamezzo:str , targa:str , ore:int):        
         if tipologiamezzo.lower() not in mezziaccettati:
-            
-            raise ValueError("Accettiamo solo moto e auto")
+            raise ValueError("Tipologia di mezzo non valida")
         
-        if tipologiamezzo.lower() == "moto" and self.__parcheggimoto >= 1:
-            self.__parcheggimoto += -1
+        if len(targa) != 7 or targa[0] not in alfabeto or targa[1] not in alfabeto or targa[2] not in numeri or targa[3] not in numeri or targa[4] not in numeri or targa[5] not in alfabeto or targa[6] not in alfabeto:
             
-            
-        elif tipologiamezzo.lower() == "auto" and self.__parcheggiauto >= 1:
-            self.__parcheggiauto += -1
-            
-    
-    def liberaPosto(self,tipologiamezzo):
-        if tipologiamezzo.lower() not in mezziaccettati:
-            
-            raise ValueError("Accettiamo solo moto e auto")
+            raise ValueError("ERRORE")
         
-        if tipologiamezzo.lower() == "moto" and self.__parcheggimoto >= 1 and self.__parcheggimoto < 200:
+        if targa in self.__postioccupati:
+            raise ValueError("Veicolo già parcheggiato.")
+        
+        if ore <= 0:
+            raise ValueError("Un po' ci devi stare")
+
+
+        inizio = datetime.now()
+        orario_fine = inizio + timedelta(hours=ore)
+
+        if tipologiamezzo == "moto":
+            if self.__parcheggimoto > 0:
+                
+                self.__parcheggimoto += -1
+                
+                self.__postioccupati[targa] = (tipologiamezzo, inizio, orario_fine)
+                
+            else:
+                raise ValueError("Posti moto terminati")
+        
+        elif tipologiamezzo == "auto":
+            
+            if self.__parcheggiauto > 0:
+                
+                self.__parcheggiauto += -1
+                
+                self.__postioccupati[targa] = (tipologiamezzo,inizio, orario_fine)
+            else:
+                raise ValueError("Posti auto terminati")
+
+    def liberaPosto(self, targa):
+        if len(targa) != 7 or targa[0] not in alfabeto or targa[1] not in alfabeto or targa[2] not in numeri or targa[3] not in numeri or targa[4] not in numeri or targa[5] not in alfabeto or targa[6] not in alfabeto:
+            
+            raise ValueError("ERRORE")
+        
+        if targa not in self.__postioccupati:
+            
+            raise ValueError("Targa non presente nel parcheggio")
+
+        tipologiamezzo = self.__postioccupati.pop(targa)[0]
+        
+        if tipologiamezzo == "moto":
+            
             self.__parcheggimoto += 1
             
-        elif tipologiamezzo.lower() == "auto" and self.__parcheggiauto >= 1 and self.__parcheggiauto < 1000:
-            self.__parcheggiauto += 1
+        elif tipologiamezzo == "auto":
             
+            self.__parcheggiauto += 1
 
 if __name__ == "__main__":
     p = PostoMezzo()
     print(p)
-    print(p.occupaPosto("auto"))
+    p.occupaPosto("auto", "AB123CD",1)
     print(p)
-    print(p.liberaPosto("auto"))
+    p.liberaPosto("AB123CD")
     print(p)
-    

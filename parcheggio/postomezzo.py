@@ -9,9 +9,9 @@ mezziaccettati = ["moto", "auto"]
 class PostoMezzo:
     def __init__(self):
         
-        self.__parcheggimoto = 200
+        self.__parcheggimoto = 1
         
-        self.__parcheggiauto = 1000
+        self.__parcheggiauto = 1
         
         self.__postioccupati = {}
 
@@ -44,14 +44,14 @@ class PostoMezzo:
 
 
         inizio = datetime.now()
-        orario_fine = inizio + timedelta(hours=ore)
+        orariofine = inizio + timedelta(hours=ore)
 
         if tipologiamezzo == "moto":
             if self.__parcheggimoto > 0:
                 
                 self.__parcheggimoto += -1
                 
-                self.__postioccupati[targa] = (tipologiamezzo, inizio, orario_fine)
+                self.__postioccupati[targa] = (tipologiamezzo, inizio, orariofine)
                 
             else:
                 raise ValueError("Posti moto terminati")
@@ -62,7 +62,7 @@ class PostoMezzo:
                 
                 self.__parcheggiauto += -1
                 
-                self.__postioccupati[targa] = (tipologiamezzo,inizio, orario_fine)
+                self.__postioccupati[targa] = (tipologiamezzo,inizio, orariofine)
             else:
                 raise ValueError("Posti auto terminati")
 

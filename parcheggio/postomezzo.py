@@ -1,94 +1,90 @@
-from datetime import datetime
-
-from datetime import timedelta
-
-alfabeto = "QWERTYUIOPASDFGHJKLZXCVBNM"
-numeri = "1234567890"
-mezziaccettati = ["moto", "auto"]
+from veicolo import Veicolo
+from auto import Auto
+from moto import Moto
+import datetime
 
 class PostoMezzo:
-    def __init__(self):
+    def __init__(self , posto:bool,mezzo:Veicolo,dataPartenza: datetime.datetime):
+        self.__posto = posto
+
+        if posto == True and mezzo != None:
+            
+            self.__mezzo = mezzo
+            
+        elif posto == False:
+            
+            raise ValueError("Parcheggio libero")
+
+        if dataPartenza > datetime.datetime.now():
+            self.__dataPartenza = dataPartenza
         
-        self.__parcheggimoto = 1
-        
-        self.__parcheggiauto = 1
-        
-        self.__postioccupati = {}
+        else:
+            raise ValueError("Inserire un orario di uscita dopo quello attuale")
 
     def __str__(self):
-        return "PostoMezzo:" + str(self.__dict__)
+        posto = "Posto:" + str(self.__dict__)
+        return posto
     
     @property
+    def mezzo(self):
+        
+        return self.__mezzo
     
-    def parcheggimoto(self):
-        return self.__parcheggimoto
-
     @property
+    def posto(self):
+        
+        return self.__posto
     
-    def parcheggiauto(self):
-        return self.__parcheggiauto
-
-    def occupaPosto(self, tipologiamezzo:str , targa:str , ore:int):        
-        if tipologiamezzo.lower() not in mezziaccettati:
-            raise ValueError("Tipologia di mezzo non valida")
+    @property
+    def dataPartenza(self):
         
-        if len(targa) != 7 or targa[0] not in alfabeto or targa[1] not in alfabeto or targa[2] not in numeri or targa[3] not in numeri or targa[4] not in numeri or targa[5] not in alfabeto or targa[6] not in alfabeto:
-            
-            raise ValueError("ERRORE")
+        return self.__dataPartenza
+    
+    @dataPartenza.setter
+    def dataPartenza(value):
         
-        if targa in self.__postioccupati:
-            raise ValueError("Veicolo già parcheggiato.")
+        if value < datetime.datetima.now:
+            
+            raise ValueError("Inserire un orario di uscita dopo quello attuale")
         
-        if ore <= 0:
-            raise ValueError("Un po' ci devi stare")
-
-
-        inizio = datetime.now()
-        orariofine = inizio + timedelta(hours=ore)
-
-        if tipologiamezzo == "moto":
-            if self.__parcheggimoto > 0:
-                
-                self.__parcheggimoto += -1
-                
-                self.__postioccupati[targa] = (tipologiamezzo, inizio, orariofine)
-                
-            else:
-                raise ValueError("Posti moto terminati")
+        self.__dataPartenza
         
-        elif tipologiamezzo == "auto":
-            
-            if self.__parcheggiauto > 0:
-                
-                self.__parcheggiauto += -1
-                
-                self.__postioccupati[targa] = (tipologiamezzo,inizio, orariofine)
-            else:
-                raise ValueError("Posti auto terminati")
-
-    def liberaPosto(self, targa):
-        if len(targa) != 7 or targa[0] not in alfabeto or targa[1] not in alfabeto or targa[2] not in numeri or targa[3] not in numeri or targa[4] not in numeri or targa[5] not in alfabeto or targa[6] not in alfabeto:
-            
-            raise ValueError("ERRORE")
+        return
+    
         
-        if targa not in self.__postioccupati:
+    def occupaPosto(self , mezzo:Veicolo, dataPartenza,targa:str):
+        if self.__posto == False:
+            self.__posto = True
+            self.__mezzo = mezzo
+            self.__dataPartenza = dataPartenza
+            self.__targa = targa
             
-            raise ValueError("Targa non presente nel parcheggio")
+        return ("Posto preso")
 
-        tipologiamezzo = self.__postioccupati.pop(targa)[0]
-
-        if tipologiamezzo == "moto":
-            
-            self.__parcheggimoto += 1
-           
-        elif tipologiamezzo == "auto":
-            
-            self.__parcheggiauto += 1
+    def liberaPosto (self):
+        if self.__posto == True and datetime.datetime.now == self.__dataPartenza:
+            self.__posto == False
+            self.__mezzo ==  None
+            self.__dataPartenza = None
+            self.__targa = None
+    
 
 if __name__ == "__main__":
-    p = PostoMezzo()
-    print(p)
-    p.occupaPosto("auto", "AB123CD",1)
-    print(p)
-    p.liberaPosto("AB123CD")
-    print(p)
+    a1 = Auto("Ferrari", "Sf90", "rosso", 6000, "benzina", "BG999JW", 2, 1, 200, 70)
+    posto = PostoMezzo(posto=True , mezzo=a1 , dataPartenza = datetime.datetime(2025, 7, 20, 20, 18, 00))
+    print(posto)
+    print(posto.occupaPosto(a1,datetime.datetime(2025, 7, 20, 20, 18, 00),"BG999JW"))
+    print(posto)
+    print(posto.liberaPosto())
+    print(posto)
+            
+
+
+
+
+
+
+
+
+
+

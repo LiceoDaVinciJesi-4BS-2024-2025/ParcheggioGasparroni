@@ -84,6 +84,7 @@ class Parcheggio():
                 self.__dataPartenza = None
                 self.__targa = None
                 self.__parcheggiauto += 1
+                return("Posto auto liberato")
                                
         if tipologia == "moto":
             if self.__posto == True:
@@ -92,6 +93,7 @@ class Parcheggio():
                 self.__dataPartenza = None
                 self.__targa = None
                 self.__parcheggimoto += 1
+                return("Posto moto liberato")
 
 if __name__ == "__main__":
     a1 = Auto("Ferrari", "Sf90", "rosso", 6000, "benzina", "BG999JW", 2, 1, 200, 70)

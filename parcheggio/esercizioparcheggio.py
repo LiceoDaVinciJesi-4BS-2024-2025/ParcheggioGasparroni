@@ -78,7 +78,7 @@ class Parcheggio():
                 raise ValueError ("Posti moto terminati")
     def liberaPosto(self,tipologia:str):
         if tipologia == "auto":
-            if self.__posto == True and datetime.datetime.now() == self.__dataPartenza:
+            if self.__posto == True:
                 self.__posto = False
                 self.__mezzo =  None
                 self.__dataPartenza = None

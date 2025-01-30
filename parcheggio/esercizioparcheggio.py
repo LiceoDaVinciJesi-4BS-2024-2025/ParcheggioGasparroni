@@ -77,9 +77,9 @@ class Parcheggio():
             elif self.__parcheggimoto <= 0: 
                 raise ValueError ("Posti moto terminati")
             
-    def liberaPosto(self,tipologia:str):
+    def liberaPosto(self,tipologia:str,targa:str):
         if tipologia == "auto":
-            if self.__posto == True:
+            if self.__posto == True and targa == self.__targa:
                 self.__posto = False
                 self.__mezzo =  None
                 self.__dataPartenza = None
@@ -87,8 +87,8 @@ class Parcheggio():
                 self.__parcheggiauto += 1
                 return("Posto auto liberato")
                                
-        if tipologia == "moto":
-            if self.__posto == True:
+        elif tipologia == "moto":
+            if self.__posto == True and targa == self.__targa:
                 self.__posto = False
                 self.__mezzo =  None
                 self.__dataPartenza = None
@@ -102,5 +102,5 @@ if __name__ == "__main__":
     print(p1)
     print(p1.occupaPosto(a1,datetime.datetime(2025, 7, 20, 20, 18, 00),"BG999JW","auto"))
     print(p1)
-    print(p1.liberaPosto("auto"))
+    print(p1.liberaPosto("auto","BG999JW"))
     print(p1)

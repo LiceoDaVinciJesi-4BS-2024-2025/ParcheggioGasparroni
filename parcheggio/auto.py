@@ -14,7 +14,7 @@ class Auto(Veicolo):
         self.__capmax = capmax
         
         if kgmerce > self.__capmax:
-            raise ValueError("Troppa droga")
+            raise ValueError("Troppa roba")
         
         self.__kgmerce = kgmerce
     

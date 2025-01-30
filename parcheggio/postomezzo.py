@@ -67,6 +67,8 @@ class PostoMezzo:
             self.__mezzo ==  None
             self.__dataPartenza = None
             self.__targa = None
+        
+        return ("Posto libero")
     
 
 if __name__ == "__main__":
@@ -76,7 +78,7 @@ if __name__ == "__main__":
     print(posto.occupaPosto(a1,datetime.datetime(2025, 7, 20, 20, 18, 00),"BG999JW"))
     print(posto)
     print(posto.liberaPosto())
-    print(posto)
+
             
 
 

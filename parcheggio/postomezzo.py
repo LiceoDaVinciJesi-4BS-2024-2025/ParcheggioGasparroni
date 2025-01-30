@@ -4,7 +4,7 @@ from moto import Moto
 import datetime
 
 class PostoMezzo:
-    def __init__(self): #, posto:bool,mezzo:Veicolo,dataPartenza: datetime.datetime):
+    def __init__(self):
         self.__posto = False
             
         self.__mezzo = None

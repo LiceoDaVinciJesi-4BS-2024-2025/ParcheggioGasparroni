@@ -50,8 +50,8 @@ class Parcheggio():
                 file.write = (str(Auto.__dict__))
                 file.write = (f"Guadagno attuale:{self.__guadagno}")
                 file.close()
-            elif self.__parcheggiauto <= 0:
                 
+            elif self.__parcheggiauto <= 0:
                 raise ValueError ("Posti auto terminati")
             
         elif tipologia == "moto":
@@ -73,8 +73,8 @@ class Parcheggio():
                 file.write = (str(Moto.__dict__))
                 file.write = (f"Guadagno attuale:{self.__guadagno}")
                 file.close()
-            elif self.__parcheggimoto <= 0:
                 
+            elif self.__parcheggimoto <= 0: 
                 raise ValueError ("Posti moto terminati")
             
     def liberaPosto(self,tipologia:str):

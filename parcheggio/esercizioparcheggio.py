@@ -91,7 +91,7 @@ class Parcheggio():
                 self.__mezzo =  None
                 self.__dataPartenza = None
                 self.__targa = None
-                self.__parcheggiauto += 1
+                self.__parcheggimoto += 1
 
 if __name__ == "__main__":
     a1 = Auto("Ferrari", "Sf90", "rosso", 6000, "benzina", "BG999JW", 2, 1, 200, 70)

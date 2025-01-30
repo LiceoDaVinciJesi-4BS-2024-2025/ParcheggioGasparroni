@@ -76,6 +76,7 @@ class Parcheggio():
             elif self.__parcheggimoto <= 0:
                 
                 raise ValueError ("Posti moto terminati")
+            
     def liberaPosto(self,tipologia:str):
         if tipologia == "auto":
             if self.__posto == True:

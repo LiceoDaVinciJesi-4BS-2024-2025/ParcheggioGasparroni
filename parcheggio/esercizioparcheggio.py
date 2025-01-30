@@ -26,8 +26,20 @@ class Parcheggio():
         return self.__parcheggiauto
     
     @property
+    def mezzo(self):
+        return self.__mezzo
+    
+    @property
     def parcheggimoto(self):
         return self.__parcheggimoto
+    
+    @property
+    def guadagno(self):
+        return self.__guadagno
+    
+    @property
+    def posto(self):
+        return self.__posto
     
     def occupaPosto(self,mezzo:Veicolo, dataPartenza:datetime,targa:str,tipologia:str,):
         if tipologia == "auto":

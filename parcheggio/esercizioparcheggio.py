@@ -35,13 +35,13 @@ class Parcheggio(PostoMezzo):
                 
                 self.__posto = True
                 self.__mezzo = mezzo
-                if dataPartenza <= datetime.datetime.now:
+                if dataPartenza <= datetime.datetime.now():
                     raise ValueError("Orario non disponibile")
                 self.__dataPartenza = dataPartenza
                 self.__targa = targa
                 self.__parcheggiauto += -1
                 
-                tempotrascorso = self.__dataPartenza - datetime.datetime.now
+                tempotrascorso = self.__dataPartenza - datetime.datetime.now()
                 tempotrascinore = (int(tempotrascorso.total_seconds())) // (60**2)
                 pagamento = 1.5 * tempotrascinore
                 guadagno += pagamento
@@ -58,13 +58,13 @@ class Parcheggio(PostoMezzo):
             if self.__posto == False and self.__parcheggimoto > 0:
                 self.__posto = True
                 self.__mezzo = mezzo
-                if dataPartenza <= datetime.datetime.now:
+                if dataPartenza <= datetime.datetime.now():
                     raise ValueError("Orario non disponibile")
                 self.__dataPartenza = dataPartenza
                 self.__targa = targa
                 self.__parcheggimoto += -1
                 
-                tempotrascorso = self.__dataPartenza - datetime.datetime.now
+                tempotrascorso = self.__dataPartenza - datetime.datetime.now()
                 tempotrascinore = (int(tempotrascorso.total_seconds())) // (60**2)
                 pagamento = 1.2 * tempotrascinore
                 guadagno += pagamento
@@ -77,9 +77,9 @@ class Parcheggio(PostoMezzo):
                 raise ValueError ("Posti moto terminati")
     def liberaPosto(self,tipologia:str):
         if tipologia == "auto":
-            if self.__posto == True and datetime.datetime.now == self.__dataPartenza:
-                self.__posto == False
-                self.__mezzo ==  None
+            if self.__posto == True and datetime.datetime.now() == self.__dataPartenza:
+                self.__posto = False
+                self.__mezzo =  None
                 self.__dataPartenza = None
                 self.__targa = None
                 self.__parcheggiauto += 1
@@ -87,9 +87,9 @@ class Parcheggio(PostoMezzo):
                 
                 
         if tipologia == "moto":
-            if self.__posto == True and datetime.datetime.now == self.__dataPartenza:
-                self.__posto == False
-                self.__mezzo ==  None
+            if self.__posto == True:
+                self.__posto = False
+                self.__mezzo =  None
                 self.__dataPartenza = None
                 self.__targa = None
                 self.__parcheggiauto += 1
@@ -100,5 +100,5 @@ if __name__ == "__main__":
     print(p1)
     print(p1.occupaPosto(a1,datetime.datetime(2025, 7, 20, 20, 18, 00),"BG999JW","auto"))
     print(p1)
-    print(p1.liberaPosto("auto")
+    print(p1.liberaPosto("auto"))
     print(p1)

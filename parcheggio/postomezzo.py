@@ -15,33 +15,29 @@ class PostoMezzo:
     
     @property
     def mezzo(self):
-        
         return self.__mezzo
     
     @property
     def posto(self):
-        
         return self.__posto
       
     def occupaPosto(self , mezzo:Veicolo, dataPartenza:datetime,targa:str):
         if self.__posto == False:
             self.__posto = True
             self.__mezzo = mezzo
-            if dataPartenza <= datetime.datetime.now:
+            if dataPartenza <= datetime.datetime.now():
                 raise ValueError("Orario non disponibile")
             self.__dataPartenza = dataPartenza
             self.__targa = targa
-            
-        return ("Posto preso")
+            return ("Posto preso")
 
     def liberaPosto (self):
-        if self.__posto == True and datetime.datetime.now == self.__dataPartenza:
-            self.__posto == False
-            self.__mezzo ==  None
+        if self.__posto == True:
+            self.__posto = False
+            self.__mezzo =  None
             self.__dataPartenza = None
             self.__targa = None
-        
-        return ("Posto libero")
+            return ("Posto libero")
     
 
 if __name__ == "__main__":

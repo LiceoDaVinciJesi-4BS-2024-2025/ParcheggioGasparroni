@@ -8,7 +8,7 @@ guadagno = 0
 
 class Parcheggio(PostoMezzo):
     def __init__(self):
-        super().__init__(posto,mezzo,dataPartenza)
+        super().__init__(posto,mezzo)
         self.__parcheggiauto = 1000
         self.__parcheggimoto = 200
         
@@ -28,13 +28,15 @@ class Parcheggio(PostoMezzo):
     def parcheggimoto(self):
         return self.__parcheggimoto
     
-    def occupaPosto(tipologia:str):
+    def occupaPosto(self,mezzo:Veicolo, dataPartenza:datetime,targa:str,tipologia:str,):
         if tipologia == "auto":
             
             if self.__posto == False and self.__parcheggiauto > 0:
                 
                 self.__posto = True
                 self.__mezzo = mezzo
+                if dataPartenza <= datetime.datetime.now:
+                    raise ValueError("Orario non disponibile")
                 self.__dataPartenza = dataPartenza
                 self.__targa = targa
                 self.__parcheggiauto += -1
@@ -92,7 +94,7 @@ class Parcheggio(PostoMezzo):
 
 if __name__ == "__main__":
     a1 = Auto("Ferrari", "Sf90", "rosso", 6000, "benzina", "BG999JW", 2, 1, 200, 70)
-    p1 = Parcheggio(posto=True , mezzo=a1 , dataPartenza = datetime.datetime(2025, 7, 20, 20, 18, 00))
+    p1 = Parcheggio()
     print(p1)
     print(p1.occupaPosto(a1,datetime.datetime(2025, 7, 20, 20, 18, 00),"BG999JW","auto"))
     print(p1)

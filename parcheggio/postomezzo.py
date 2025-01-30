@@ -4,22 +4,10 @@ from moto import Moto
 import datetime
 
 class PostoMezzo:
-    def __init__(self , posto:bool,mezzo:Veicolo,dataPartenza: datetime.datetime):
-        self.__posto = posto
-
-        if posto == True and mezzo != None:
+    def __init__(self): #, posto:bool,mezzo:Veicolo,dataPartenza: datetime.datetime):
+        self.__posto = False
             
-            self.__mezzo = mezzo
-            
-        elif posto == False:
-            
-            raise ValueError("Parcheggio libero")
-
-        if dataPartenza > datetime.datetime.now():
-            self.__dataPartenza = dataPartenza
-        
-        else:
-            raise ValueError("Inserire un orario di uscita dopo quello attuale")
+        self.__mezzo = None
 
     def __str__(self):
         posto = "Posto:" + str(self.__dict__)
@@ -34,28 +22,13 @@ class PostoMezzo:
     def posto(self):
         
         return self.__posto
-    
-    @property
-    def dataPartenza(self):
-        
-        return self.__dataPartenza
-    
-    @dataPartenza.setter
-    def dataPartenza(value):
-        
-        if value < datetime.datetima.now:
-            
-            raise ValueError("Inserire un orario di uscita dopo quello attuale")
-        
-        self.__dataPartenza
-        
-        return
-    
-        
-    def occupaPosto(self , mezzo:Veicolo, dataPartenza,targa:str):
+      
+    def occupaPosto(self , mezzo:Veicolo, dataPartenza:datetime,targa:str):
         if self.__posto == False:
             self.__posto = True
             self.__mezzo = mezzo
+            if dataPartenza <= datetime.datetime.now:
+                raise ValueError("Orario non disponibile")
             self.__dataPartenza = dataPartenza
             self.__targa = targa
             
@@ -73,11 +46,12 @@ class PostoMezzo:
 
 if __name__ == "__main__":
     a1 = Auto("Ferrari", "Sf90", "rosso", 6000, "benzina", "BG999JW", 2, 1, 200, 70)
-    posto = PostoMezzo(posto=True , mezzo=a1 , dataPartenza = datetime.datetime(2025, 7, 20, 20, 18, 00))
+    posto = PostoMezzo()
     print(posto)
     print(posto.occupaPosto(a1,datetime.datetime(2025, 7, 20, 20, 18, 00),"BG999JW"))
     print(posto)
     print(posto.liberaPosto())
+    print(posto)
 
             
 

@@ -6,9 +6,10 @@ from postomezzo import PostoMezzo
 
 guadagno = 0
 
-class Parcheggio(PostoMezzo):
+class Parcheggio():
     def __init__(self):
-        super().__init__(posto,mezzo)
+        self.__posto = False
+        self.__mezzo = None
         self.__parcheggiauto = 1000
         self.__parcheggimoto = 200
         

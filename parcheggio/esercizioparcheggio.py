@@ -58,6 +58,8 @@ class Parcheggio(PostoMezzo):
             if self.__posto == False and self.__parcheggimoto > 0:
                 self.__posto = True
                 self.__mezzo = mezzo
+                if dataPartenza <= datetime.datetime.now:
+                    raise ValueError("Orario non disponibile")
                 self.__dataPartenza = dataPartenza
                 self.__targa = targa
                 self.__parcheggimoto += -1

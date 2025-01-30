@@ -83,9 +83,7 @@ class Parcheggio(PostoMezzo):
                 self.__dataPartenza = None
                 self.__targa = None
                 self.__parcheggiauto += 1
-                
-                
-                
+                               
         if tipologia == "moto":
             if self.__posto == True:
                 self.__posto = False

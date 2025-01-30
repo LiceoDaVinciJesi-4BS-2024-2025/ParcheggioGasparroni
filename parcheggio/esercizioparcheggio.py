@@ -4,7 +4,6 @@ from moto import Moto
 import datetime
 from postomezzo import PostoMezzo
 
-guadagno = 0
 
 class Parcheggio():
     def __init__(self):
@@ -12,9 +11,10 @@ class Parcheggio():
         self.__mezzo = None
         self.__parcheggiauto = 1000
         self.__parcheggimoto = 200
+        self.__guadagno = 0
         
         file = open("park.data","w")
-        file.write((f"Guadagno attuale:{guadagno}"))
+        file.write((f"Guadagno attuale:{self.__guadagno}"))
         file.close()
         
     def __str__ (self):
@@ -45,10 +45,10 @@ class Parcheggio():
                 tempotrascorso = self.__dataPartenza - datetime.datetime.now()
                 tempotrascinore = (int(tempotrascorso.total_seconds())) // (60**2)
                 pagamento = 1.5 * tempotrascinore
-                guadagno += pagamento
+                self.__guadagno += pagamento
                 file = open("park.data","a")
                 file.write = (str(Auto.__dict__))
-                file.write = (f"Guadagno attuale:{guadagno}")
+                file.write = (f"Guadagno attuale:{self.__guadagno}")
                 file.close()
             elif self.__parcheggiauto <= 0:
                 
@@ -68,10 +68,10 @@ class Parcheggio():
                 tempotrascorso = self.__dataPartenza - datetime.datetime.now()
                 tempotrascinore = (int(tempotrascorso.total_seconds())) // (60**2)
                 pagamento = 1.2 * tempotrascinore
-                guadagno += pagamento
+                self.__guadagno += pagamento
                 file = open("park.data","a")
                 file.write = (str(Moto.__dict__))
-                file.write = (f"Guadagno attuale:{guadagno}")
+                file.write = (f"Guadagno attuale:{self.__guadagno}")
                 file.close()
             elif self.__parcheggimoto <= 0:
                 

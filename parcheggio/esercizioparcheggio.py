@@ -12,7 +12,8 @@ class Parcheggio():
         self.__parcheggiauto = 1000
         self.__parcheggimoto = 200
         self.__guadagno = 0
-        
+
+        #PROF: Scusa... ma qui fai write? Quando il guadagno (due righe fa) lo hai messo a 0?? Che senso ha???
         file = open("park.data","w")
         file.write((f"Guadagno attuale:{self.__guadagno}"))
         file.close()
@@ -58,6 +59,7 @@ class Parcheggio():
                 tempotrascinore = (int(tempotrascorso.total_seconds())) // (60**2)
                 pagamento = 1.5 * tempotrascinore
                 self.__guadagno += pagamento
+                # PROF: Vuoi salvare tutta la cronologia dei guadagni?? E i parcheggi?
                 file = open("park.data","a")
                 file.write = (str(Auto.__dict__))
                 file.write = (f"Guadagno attuale:{self.__guadagno}")
@@ -81,6 +83,7 @@ class Parcheggio():
                 tempotrascinore = (int(tempotrascorso.total_seconds())) // (60**2)
                 pagamento = 1.2 * tempotrascinore
                 self.__guadagno += pagamento
+                # PROF: Se ogni tanto metti dentro un dato... come farai a rileggere il file?? Impossibile...
                 file = open("park.data","a")
                 file.write = (str(Moto.__dict__))
                 file.write = (f"Guadagno attuale:{self.__guadagno}")
